@@ -10,6 +10,7 @@ import {
 import TelefonLista from './components/Telefonok/TelefonLista';
 import TelefonFelvetel from './components/Telefonok/TelefonFelvetel';
 import TelefonTorles from './components/Telefonok/TelefonTorles';
+import Navigacio from './components/NavigacioMenu';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <Navigacio/>
+    <main style={{width: "90vw", margin: "auto", marginTop: 40}}>
+
     <RouterProvider router={router}></RouterProvider>
+    </main>
   </StrictMode>,
 )

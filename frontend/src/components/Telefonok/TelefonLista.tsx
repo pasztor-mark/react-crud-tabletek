@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react"
+import { Tablet } from "../../types";
+import TabletKartya from "../TabletKartya";
 
 
-interface Phone {
-    Id: number;
-    Brand: string;
-    Model: string;
-    Price: number;
-}
+
 
 export default function TelefonLista() {
 
-    const [phones, setPhones] = useState<Phone[]>([]);
+    const [tablets, setTablets] = useState<Tablet[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState(null);
     const [errorServer, setErrorServer] = useState<string>("");
     
     useEffect(() => {
-        fetch("http://localhost:3000/phones")
+        fetch("http://localhost:3000/tabletek")
             .then((response) => { 
                 if (response.status === 404){
                     setErrorServer('A kért erőforrás nem található (404)!');
@@ -29,7 +26,7 @@ export default function TelefonLista() {
                 return response.json() 
             })
             .then((data) => {
-                setPhones(data);
+                setTablets(data);
                 setLoading(false);
                 //console.log(data); 
             })
@@ -50,21 +47,17 @@ export default function TelefonLista() {
     }
 
     return <>
-        <h1>Telefonok</h1>
-        <h2>Menü</h2>
-            <a href="/telefonlista">Telefonok listája</a><br/>
-            <a href="/telefonfelvetel">Telefon felvétele</a><br/>
-            <a href="/telefontorles">Telefonok törlése</a><br/>
-        <h2>Telefonok listája</h2>
+        <h1>Tablet Webshop</h1>
 
-        <ul>
-            {phones.map((phone) => (
-                    <li key={phone.Id}>
-                        {phone.Brand}: {phone.Model} - {phone.Price}
-                    </li>
+
+        <section className="tabletListaSection">
+            {tablets.map((tab) => (
+                    <TabletKartya key={tab.id} tablet={tab}/>
+
+                    
                     )
                 )
             }
-        </ul>
+        </section>
     </>
 }
