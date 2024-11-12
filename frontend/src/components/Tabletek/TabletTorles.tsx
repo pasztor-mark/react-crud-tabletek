@@ -2,10 +2,7 @@ import { useEffect, useState } from "react"
 import { Tablet } from "../../types";
 import TabletKartya from "../TabletKartya";
 
-
-
-
-export default function TelefonLista() {
+export default function TabletTorles() {
 
     const [tablets, setTablets] = useState<Tablet[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
@@ -17,21 +14,21 @@ export default function TelefonLista() {
             .then((response) => { 
                 if (response.status === 404){
                     setErrorServer('A kért erőforrás nem található (404)!');
-                    //throw new Error('A kért erőforrás nem található (404)!');
+                    
                 }
                 if (!response.ok) {
                     setErrorServer(`Server responded with status ${response.status}`);
-                    //throw new Error(`Server responded with status ${response.status}`);
+                    
                 }
                 return response.json() 
             })
             .then((data) => {
                 setTablets(data);
                 setLoading(false);
-                //console.log(data); 
+                
             })
             .catch((error) => { 
-                //console.log(error.message) 
+                
                 setError(error.message);
             })
     }, [])
@@ -47,17 +44,14 @@ export default function TelefonLista() {
     }
 
     return <>
-        <h1>Tablet Webshop</h1>
-
-
-        <section className="tabletListaSection">
-            {tablets.map((tab) => (
-                    <TabletKartya key={tab.id} tablet={tab}/>
+       
+       {tablets.map((tab) => (
+                    <TabletKartya torles={true} key={tab.id} tablet={tab}/>
 
                     
                     )
                 )
             }
-        </section>
+        
     </>
 }

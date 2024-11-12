@@ -3,23 +3,16 @@ import {} from "react";
 export function Navigacio() {
   return (
     <>
-      <nav
-        style={{
-          display: "flex",
-          backgroundColor: "#1f1f1f",
-          width: "100vw",
-          padding: 8,
-          fontSize: 24,
-          marginBottom: 28  ,
-          justifyContent: "space-evenly",
-          margin: "auto",
-        }}
+      <nav className="flex bg-[#1f1f1f] w-full p-8 text-white font-bold underline text-2xl mb-7 justify-evenly items-center mx-auto"
+
       >
-        <a href="/telefonlista">Telefonok listája</a>
+        <a href="/">Kezdőlap</a>
         <br />
-        <a href="/telefonfelvetel">Telefon felvétele</a>
+        <a href="/tabletek">Tabletek listája</a>
         <br />
-        <a href="/telefontorles">Telefonok törlése</a>
+        <a href="/tabletekadd">Tabletek felvétele</a>
+        <br />
+        <a href="/tabletekdelete">Tabletek törlése</a>
         <br />
       </nav>
     </>

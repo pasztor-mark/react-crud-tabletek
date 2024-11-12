@@ -13,4 +13,5 @@
   
  export declare interface TabletKartyaProps {
     tablet: Tablet
+    torles: boolean
  }
