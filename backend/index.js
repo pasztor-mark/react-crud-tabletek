@@ -28,6 +28,18 @@ app.get("/tabletek", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+app.get("/tabletek/:id", async (req, res) => {
+  try {
+    const {id} = req.params.id
+    const temp = await db.query("SELECT * FROM tabletek WHERE id = ?", id);
+    const rows = temp[0];
+    const fields = temp[1];
+    res.status(200).json(rows);
+  } catch (error) {
+    console.error(`Hiba a tabletek betöltésénél: ${error}`);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 app.post("/tabletek", async (req, res) => {
   try {
@@ -100,17 +112,49 @@ app.post("/tabletek", async (req, res) => {
   }
 });
 
+app.get('/tabletek/:id', async (req, res) => {
+  const tabletId = parseInt(req.params.id);  
+  const query = `SELECT *
+  FROM tabletek
+  WHERE
+  id = ?`
+  const tablet = await db.execute(query, tabletId)
+
+  if (!tablet) {
+    return res.status(404).json({ error: 'Tablet not found' });
+  }
+  return res.json(tablet);  
+});
 app.delete("/tabletek/:tabletId", async (req, res) => {
   try {
+
     let tabletId = parseInt(req.params.tabletId);
     const [rows, fields] = await db.query("DELETE FROM tabletek WHERE id =?", [
-        tabletId,
+      tabletId,
     ]);
     if (rows.length === 0) {
       res.status(404).json({ error: "Tablet not found" });
     } else {
       res.status(200).json({ message: "Tablet kitörölve" });
     }
+  } catch (error) {
+    console.error(`Sikertelen törlés:  ${error}`);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.put("/tabletek/:tabletId", async (req, res) => {
+  try {
+
+    let tabletId = parseInt(req.params.tabletId);
+    if (tabletId === 0 | tabletId === null) {
+      return
+    } 
+    const {termek_nev, ar} = req.body
+    
+    
+    const query = 'UPDATE tabletek SET termek_nev = ?, ar = ? WHERE id = ?'
+    await db.execute(query, [termek_nev, ar, tabletId])
   } catch (error) {
     console.error(`Sikertelen törlés:  ${error}`);
     res.status(500).json({ error: "Internal Server Error" });

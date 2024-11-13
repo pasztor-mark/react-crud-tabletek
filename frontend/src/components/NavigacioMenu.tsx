@@ -14,6 +14,9 @@ export function Navigacio() {
         <br />
         <a href="/tabletekdelete">Tabletek törlése</a>
         <br />
+        <a href="/updateTablet">Tabletek frissítése</a>
+        <br />
+        
       </nav>
     </>
   );

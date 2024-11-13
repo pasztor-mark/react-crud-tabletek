@@ -9,10 +9,12 @@ import {
 } from "react-router-dom";
 import TabletLista from './components/Tabletek/TabletLista';
 import TabletFelvetel from './components/Tabletek/TabletFelvetel';
-
+import updateTablet from './components/Tabletek/UpdateTablet';
 import Navigacio from './components/NavigacioMenu';
 import TabletTorles from './components/Tabletek/TabletTorles';
 import Home from './components/Tabletek/Home';
+import KiemeltTablet from './components/KiemeltTablet';
+import UpdateTablet from './components/Tabletek/UpdateTablet';
 
 
 const router = createBrowserRouter([
@@ -29,8 +31,17 @@ const router = createBrowserRouter([
     element: <TabletFelvetel />,
   },
   {
+    path: "/tabletek/:id",
+    element: <KiemeltTablet />,
+  },
+  {
     path: "/tabletekdelete",
     element: <TabletTorles />,
+  },
+  
+  {
+    path: "/updateTablet",
+    element: <UpdateTablet />,
   }
 ]);
 
