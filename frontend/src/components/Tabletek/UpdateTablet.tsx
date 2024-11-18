@@ -19,7 +19,7 @@ export default function UpdateTablet() {
                 
             })
     }, [])
-    async function handleSubmit(e: any) {
+    async function handleSubmit(e) {
         e.preventDefault()
         const formData = new FormData(e.target)
         const termek_nev = formData.get("termek_nev")

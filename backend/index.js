@@ -160,5 +160,25 @@ app.put("/tabletek/:tabletId", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+app.get('/pages', async (req, res) => {
+  
+  const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const offset = (page - 1) * limit;
+    try {        
+        const countResult = await db.query('SELECT COUNT(*) as total FROM tabletek');
+        const total = countResult[0][0].total;
+        const temp = await db.query('SELECT * FROM tabletek LIMIT ? OFFSET ?', [limit, offset]);
+        const rows = temp[0];
+        res.status(200).json({
+            data: rows,
+            currentPage: page,
+            totalPages: Math.ceil(total / limit),
+        });
+    } catch (error) {
+        console.error(`Error retrieving phones ${error}`);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
 app.listen(3000);

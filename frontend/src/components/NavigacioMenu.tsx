@@ -17,6 +17,11 @@ export function Navigacio() {
         <a href="/updateTablet">Tabletek frissítése</a>
         <br />
         
+        <a href="/oldallista">Tabletek listája</a>
+        <br />
+        <a href="/tabletekfullcrud">Minden</a>
+        <br />
+        
       </nav>
     </>
   );

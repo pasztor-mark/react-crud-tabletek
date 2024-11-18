@@ -5,17 +5,18 @@ import './index.css'
 import {
   createBrowserRouter,
   RouterProvider,
-  Navigate
+
 } from "react-router-dom";
 import TabletLista from './components/Tabletek/TabletLista';
 import TabletFelvetel from './components/Tabletek/TabletFelvetel';
-import updateTablet from './components/Tabletek/UpdateTablet';
+
 import Navigacio from './components/NavigacioMenu';
 import TabletTorles from './components/Tabletek/TabletTorles';
 import Home from './components/Tabletek/Home';
 import KiemeltTablet from './components/KiemeltTablet';
 import UpdateTablet from './components/Tabletek/UpdateTablet';
-
+import Pagination from './components/Tabletek/Pagination';
+import Minden from './components/Tabletek/Minden';
 
 const router = createBrowserRouter([
   {
@@ -42,7 +43,15 @@ const router = createBrowserRouter([
   {
     path: "/updateTablet",
     element: <UpdateTablet />,
-  }
+  },
+  {
+    path: "/oldallista",
+    element: <Pagination />,
+  },
+  {
+    path: "/tabletekfullcrud",
+    element: <Minden />,
+  },
 ]);
 
 createRoot(document.getElementById('root')!).render(
